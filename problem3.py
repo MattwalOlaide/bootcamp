@@ -5,7 +5,7 @@ def valid_pass(many_pass):
 		digs = get_dig(this_pass)
 		lows = get_low(this_pass)
 		ups = get_high(this_pass)
-		if digs == True and lows == True and ups == True:
+		if digs and lows and ups:
 			kount_pas +=1
 	print ("Password.txt has {0} valid passwords".format(kount_pas)) 
 
