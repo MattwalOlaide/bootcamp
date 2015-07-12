@@ -1,63 +1,71 @@
-def generate_series(number):
+def generate_series(number,determinant=None):
 	my_list = []
 	a,b = 0,1
 	my_list.append(a)
 	if type(number) is int:
 		limiter = number - 1
+		if number < 2:
+			#print "fibonacci series can not have less than two numbers"
+			return -1
 		for i in range(0,limiter):
 			a,b = b,a+b
 			my_list.append(a)
-		print "List of a fibonacci sequence of {0} numbers is: {1}".format(number,my_list)
-		return my_list
+		#print "List of a fibonacci sequence of {0} numbers is: {1}".format(number,my_list)
+		return my_list		
 	else:
-		print"not supported"
+		print"Your input is not supported"
 		return -1
+
 def generate_series_sum(number,determinant=None):
+	
 	if type(number) is int:
-		my_list = generate_series(number)
-		if determinant is None:
-			series_sum = 0
-			for num in my_list:
-				series_sum += num
-			print "Sum of a fibonacci sequence of {0} numbers is: {1}".format(number,series_sum)
-		elif determinant=="even":
-			get_even_num(number,my_list)
-			#print "The sum of the first {0} even numbers in a fibonacci sequence is: {1}",format(number,numbers_sum)
+		my_list = [0,1]
+		new_list =[]
+		if determinant == "even":
 			
-		elif determinant=="odd":
-			pass
+			while len(new_list) < number:
+				holder = get_next_item(my_list)
+				my_list.append(holder)
+				if holder % 2 == 0:
+					new_list.append(holder)
+			return new_list
+			return sum_list(new_list)
+				
+		elif determinant == "odd":
+			while len(new_list) < number:
+				holder = get_next_item(my_list)
+				my_list.append(holder)
+				if holder % 2 != 0:
+					new_list.append(holder)
+			return new_list
+			return sum_list(new_list)
+				
+
+		elif determinant is None:
+			my_list = generate_series(number)
+			return sum_list(my_list)
 		else:
 			return -1
+		
 	else:
 		return -1
 
+def get_next_item(number):
+	last_item = len(number) - 1
+	gen_item = number[last_item] + number[last_item-1]
+	return gen_item
 
-def get_even_num(number,my_list):
-	kount = 0
-	even_nums = []
+def sum_list(my_list):
+	series_sum = 0
 	for num in my_list:
-		if num % 2 == 0:
-			kount +=1
-			even_nums.append(num)
-			if kount >= number:
-				sumNumbers(even_nums,number)
-			else:
-				new_limit = number + 1
-				generate_series(new_limit)
+		if type(num) != int:
+			return "Not a list of integers"
+		series_sum += num
+	return series_sum
 
 
-def sumNumbers(another_list,number):
-	kount = 0
-	numbers_sum = 0
-	while kount < number:
-		even_num = another_list[kount]
-		numbers_sum += even_num
-	print  "The sum of the first {0} even numbers in a fibonacci sequence is: {1}",format(number,numbers_sum)
+#num = int(raw_input("Enter a number:"))
 
-
-
-num = int(raw_input("Enter a number:"))
-
-generate_series(num)
-generate_series_sum(num,"even")
+#print generate_series(num)
+#print generate_series_sum(num,"odd")
 

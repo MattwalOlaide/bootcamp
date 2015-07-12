@@ -26,6 +26,8 @@ class FiboTest(unittest.TestCase):
 		self.assertEqual(problem4.generate_series(-2),-1,msg="Lol! Dear unlearned prof. please remember that fibonacci starts @ zero.")
 	def testIntegerSeries(self):
 		self.assertEqual(problem4.generate_series(4),[0,1,1,2],msg="Chairman! Are you Mr Abaga?")
+	def testSingleNumberSeries(self):
+		self.assertEqual(problem4.generate_series(1),-1,msg="Uhn?")
 	#for sums alone without even or odd determinant
 	def testFloatSum(self):
 		self.assertEqual(problem4.generate_series_sum(2.5,determinant = None),-1,msg="Hey! no such sums.")
